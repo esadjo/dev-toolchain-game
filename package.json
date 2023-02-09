@@ -1,0 +1,11 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "p5": "^1.5.0",
+    "p5.play": "^3.5.20"
+  }
+}
