@@ -48,7 +48,7 @@ window.draw = () => {
 };
 
 window.keyPressed = () => {
-    if (keyCode == RIGHT_ARROW) {
+    if (keyCode == RIGHT_ARROW) { //Figure out why right key isn't working
       player.setSpeed(1.5, 0);
     }
     else if (keyCode == DOWN_ARROW) {
