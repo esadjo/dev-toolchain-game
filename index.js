@@ -24,6 +24,27 @@ window.draw = () => {
     text("use arrow keys, or SPACE to stop",
     width/2, height*0.67);
     drawSprites();
+    
+    // Sprites on the move from https://creative-coding.decontextualize.com/making-games-with-p5-play/
+    /*for (let i = 0; i < 10; i++) {
+        let spr;
+        spr = createSprite(width/2, height/2, 40, 40);
+        spr.shapeColor = color(0);
+        //spr.velocity.y = 0;
+        if (spr.position.y >= height) {
+            spr.velocity.y *= -1;
+            // set to height to prevent "tunneling"
+            spr.position.y = height;
+        }
+    }
+      // constant downward speed
+      // (i.e., gravity)
+      spr.addSpeed(0.25, 90);
+      drawSprites();*/
+
+    //REFERENCE -- Collision callbacks -- https://creative-coding.decontextualize.com/making-games-with-p5-play/
+    //Maybe also collision -- "Collisions" -- https://creative-coding.decontextualize.com/making-games-with-p5-play/
+    // Maybe also second code under Multiple sprites
 };
 
 window.keyPressed = () => {
