@@ -12,13 +12,24 @@ let player;
 let balls;
 let character;
 let fires;
+let score = 0;
+let scaleBalloon = 70;
+let test;
 
 window.setup = () => {
 	new Canvas(windowWidth, windowHeight);
 
 	player = new Sprite();
-	player.img = 'images/balloon.png';
+	//Until FIGURE OUT HOW TO SCALE IMAGES
+  //player.img = 'images/balloon.png';
+  player.color = 'red'; //(208, 64, 60);
 	player.diameter = 70;
+  //Testing (eventually use fires)
+  test = new Sprite();
+  test.diameter = 70;
+  test.position.x = windowWidth/4;
+  test.position.y =  windowHeight/8*7;
+
 
   // Reference -- https://editor.p5js.org/mbardin/sketches/OyZLpQW6N 
 
@@ -26,7 +37,7 @@ window.setup = () => {
     fires = new Group();
   
     for (let i = 0; i < 4; i++) {
-        character = new Sprite();
+        character = new Sprite(100, 100); // (random(windowWidth), random(windowHeight));
         character.img = 'images/fire.png';
         //character.rotation = 0;
         //character.rotationSpeed = 1;
@@ -43,14 +54,29 @@ window.setup = () => {
 window.draw = () => {
 	//clear();
     // Using code from "Sprites on the move" of https://creative-coding.decontextualize.com/making-games-with-p5-play/
-    background(139, 188, 234);
+    background(1, 36, 68);
     textAlign(CENTER, CENTER);
-    text("use arrow keys, or SPACE to stop",
-    width/2, height*0.67);
+    textSize(20);
+    fill(255);
+    text("use arrow keys, or SPACE to stop", width/2, height*0.67);
     drawSprites();
+
+    if (player.position.x > windowWidth) {
+      player.position.x = 0;
+    } else if (player.position.x < 0) {
+      player.position.x = windowWidth - 10;
+    } 
+
+    if (player.position.y > windowHeight) {
+      player.position.y = 0;
+    } else if (player.position.y < 0) {
+      player.position.y = windowHeight - 10;
+    }
+
+    
     
       for (let i = 0; i < fires.length; i++) {
-        fires[i].position.x += fires[i].width * 0.01;
+        fires[i].position.x += fires[i].width * 30.01 + 100;
         if (fires[i].position.x > windowWidth) {
           fires[i].position.x = random(windowWidth - 100);
         }
@@ -59,7 +85,7 @@ window.draw = () => {
         }
        // fires[i].rotation = 0;
         fires[i].rotationSpeed = 1;
-        fires[i].setSpeed(random(12), random(100));
+        fires[i].setSpeed(random(1), random(3));
        // fires[i].setSpeed(random(12), random(360));
         //fires[i].position.y = random(0, windowHeight); //Added
       }
@@ -84,6 +110,11 @@ window.draw = () => {
       drawSprites();*/
 
     //REFERENCE -- Collision callbacks -- https://creative-coding.decontextualize.com/making-games-with-p5-play/
+    // FIX!!!
+    if(player.overlap(test)) {
+       expandBalloon(score);
+    };
+    //player.overlap(fires, expandBalloon(score));
     //Maybe also collision -- "Collisions" -- https://creative-coding.decontextualize.com/making-games-with-p5-play/
     // Maybe also second code under Multiple sprites
 };
@@ -105,4 +136,10 @@ window.keyPressed = () => {
       player.setSpeed(0, 0);
     }
     return false;  
+};
+
+window.expandBalloon = (m) => {
+ // player.diameter = 400;
+  sprite.width = scaleBalloon + 100*m
+  score += 1;
 };
