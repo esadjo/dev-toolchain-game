@@ -15,18 +15,25 @@ let fires;
 let score = 0;
 let scaleBalloon = 70;
 let test;
+let playerImg;
+window.preload = () => {
+  playerImg = loadImage('images/balloon.png');
+};
 
 window.setup = () => {
 	new Canvas(windowWidth, windowHeight);
 
-	player = new Sprite();
+	//player = new Sprite();
+  // Following "Images and animations" from https://creative-coding.decontextualize.com/making-games-with-p5-play/
+  player = createSprite(windowWidth/2, windowHeight/2);
 	//Until FIGURE OUT HOW TO SCALE IMAGES
   //player.img = 'images/balloon.png';
-  player.color = 'red'; //(208, 64, 60);
-	player.diameter = 70;
+  //player.color = 'red'; //(208, 64, 60);
+  player.addImage(playerImg);
+  //player.diameter = 1000;
   //Testing (eventually use fires)
   test = new Sprite();
-  test.diameter = 70;
+  test.diameter = 100;
   test.position.x = windowWidth/4;
   test.position.y =  windowHeight/8*7;
 
@@ -121,16 +128,16 @@ window.draw = () => {
 
 window.keyPressed = () => {
     if (keyCode == RIGHT_ARROW) { //Figure out why right key isn't working
-      player.setSpeed(1.5, 0);
+      player.setSpeed(3.5, 0);
     }
     else if (keyCode == DOWN_ARROW) {
-      player.setSpeed(1.5, 90);
+      player.setSpeed(3.5, 90);
     }
     else if (keyCode == LEFT_ARROW) {
-      player.setSpeed(1.5, 180);
+      player.setSpeed(3.5, 180);
     }
     else if (keyCode == UP_ARROW) {
-      player.setSpeed(1.5, 270);
+      player.setSpeed(3.5, 270);
     }
     else if (key == ' ') {
       player.setSpeed(0, 0);
@@ -140,6 +147,6 @@ window.keyPressed = () => {
 
 window.expandBalloon = (m) => {
  // player.diameter = 400;
-  sprite.width = scaleBalloon + 100*m
+  sprite.width = scaleBalloon + 20*m
   score += 1;
 };
