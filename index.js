@@ -2,6 +2,7 @@
 //   - Make fire not just move vertically (make it more random and also SLOWER!!!)
 //   - Add levels of difficulty ?
 //   - Add button to restart game
+//   - 
 
 // Also reference -- https://p5play.org/learn/ 
 
@@ -19,6 +20,7 @@ let fires;
 let score = 0;
 let playerImg;
 let backgroundImg; 
+let buttonRestart;
 window.preload = () => {
   playerImg = loadImage('images/balloon.png');
   // How to add background image -  https://p5js.org/examples/image-background-image.html
@@ -31,6 +33,7 @@ window.setup = () => {
   player = createSprite(windowWidth/2, windowHeight/2);
   player.addImage(playerImg);
   player.scale = 0.2;
+
 
 
   // Reference -- https://editor.p5js.org/mbardin/sketches/OyZLpQW6N 
@@ -54,6 +57,7 @@ window.draw = () => {
     //background(1, 36, 68);
     // PULLING FROM INTERACTIVE SKETCH
     background(backgroundImg);
+
     //background(0, 0, 0);
     //background(200*20*(score+1), 200*(36+score), 200*68*(score+1));
     for (let i = 0; i < 20; i++) {
@@ -97,6 +101,9 @@ window.draw = () => {
         fires[i].position.x = random(windowWidth);
         fires[i].position.y = random(windowHeight);
       }
+     /* if (score >= 35) {
+        fires[i].setSpeed(0); // QUESTION -- WHY THEY ARE STILL MOVING
+      }*/
     }
 
     drawSprites();
@@ -120,6 +127,20 @@ window.draw = () => {
       text("Game over!", width/2, height*0.5);
       text("score");
       fires.setSpeed(0);
+      // QUESTION !!! -- WHY ISN'T THIS BUTTON APPEARING
+      // https://p5js.org/reference/#/p5/createButton
+     /* buttonRestart = createButton('Restart');
+      buttonRestart.position(windowWidth/2, windowHeight/8*7);
+      buttonRestart.mousePressed(resizeCanvas(windowWidth, windowHeight));*/
+      //buttonRestart = createButton('Restart');
+      /*buttonRestart = createSprite(windowWidth/2, windowHeight/2);
+      buttonRestart.width = 550;
+      buttonRestart.height = 50;
+      buttonRestart.position.x = windowWidth/2;
+      buttonRestart.position.y = windowHeight/8*7;
+      buttonRestart.color = 'white';
+      buttonRestart.textSize = 20; 
+      buttonRestart.text = "Restart";*/
     }
 };
 
