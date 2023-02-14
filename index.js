@@ -14,7 +14,6 @@ let character;
 let fires;
 let score = 0;
 let scaleBalloon = 70;
-let test;
 let playerImg;
 window.preload = () => {
   playerImg = loadImage('images/balloon.png');
@@ -32,11 +31,6 @@ window.setup = () => {
   //player.color = 'red'; //(208, 64, 60);
 
   //player.diameter = 1000;
-  //Testing (eventually use fires)
-  test = new Sprite();
-  test.diameter = 100;
-  test.position.x = windowWidth/4;
-  test.position.y =  windowHeight/8*7;
 
 
   // Reference -- https://editor.p5js.org/mbardin/sketches/OyZLpQW6N 
@@ -119,7 +113,7 @@ window.draw = () => {
 
     //REFERENCE -- Collision callbacks -- https://creative-coding.decontextualize.com/making-games-with-p5-play/
     // FIX!!!
-    if(player.overlap(test)) {
+    if(player.overlap(fires)) {
        expandBalloon(score);
     };
     //player.overlap(fires, expandBalloon(score));
