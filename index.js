@@ -16,7 +16,7 @@ let playerImg;
 let backgroundImg; 
 window.preload = () => {
   playerImg = loadImage('images/balloon.png');
-  backgroundImg = loadImage('assets/moonwalk.jpg');
+  backgroundImg = loadImage('images/darkBack.png');
 };
 
 window.setup = () => {
