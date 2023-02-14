@@ -38,19 +38,21 @@ window.setup = () => {
     balls = new Group();
     fires = new Group();
   
-    for (let i = 0; i < 4; i++) {
-        character = new Sprite(100, 100); // (random(windowWidth), random(windowHeight));
-        character.img = 'images/fire.png';
-        //character.rotation = 0;
-        //character.rotationSpeed = 1;
-        //character.setSpeed(random(12), random(360));
-        fires.add(character);
+   // while (fires.length < 2) {
+      for (let i = 0; i < 1; i++) {
+          character = new Sprite(random(windowWidth), random(windowHeight)); // (random(windowWidth), random(windowHeight));
+          character.img = 'images/fire.png';
+          //character.rotation = 0;
+          //character.rotationSpeed = 1;
+          //character.setSpeed(random(12), random(360));
+          fires.add(character);
 
-       /* let c = new Sprite();
-        c.img = 'images/fire.png';
-        c.diameter = random(50, 100);
-        balls.add(c);*/
-    }
+        /* let c = new Sprite();
+          c.img = 'images/fire.png';
+          c.diameter = random(50, 100);
+          balls.add(c);*/
+      }
+   // }
 };
 
 window.draw = () => {
@@ -74,23 +76,16 @@ window.draw = () => {
     } else if (player.position.y < 0) {
       player.position.y = windowHeight - 10;
     }
-
     
-    
-      for (let i = 0; i < fires.length; i++) {
-        fires[i].position.x += fires[i].width * 30.01 + 100;
-        if (fires[i].position.x > windowWidth) {
-          fires[i].position.x = random(windowWidth - 100);
-        }
-        if (fires[i].position.y > windowHeight) {
-          fires[i].position.y = random(windowHeight - 100);
-        }
-       // fires[i].rotation = 0;
-        fires[i].rotationSpeed = 1;
-        fires[i].setSpeed(random(1), random(3));
-       // fires[i].setSpeed(random(12), random(360));
-        //fires[i].position.y = random(0, windowHeight); //Added
+    for (let i = 0; i < fires.length; i++) {
+      fires[i].setSpeed(0.00000001); // QUESTION - Why does it seem like the speed isn't decreasing even though made it reall small
+      fires[i].position.x += fires[i].width;
+      if (fires[i].position.x > windowWidth) {
+        fires[i].position.x = random(windowWidth);
+        fires[i].position.y = random(windowHeight);
       }
+    }
+
     drawSprites();
 
     
@@ -122,7 +117,7 @@ window.draw = () => {
 };
 
 window.keyPressed = () => {
-    if (keyCode == RIGHT_ARROW) { //Figure out why right key isn't working
+    if (keyCode == RIGHT_ARROW) { //QUESTION -- Figure out why right key isn't working
       player.setSpeed(3.5, 0);
     }
     else if (keyCode == DOWN_ARROW) {
@@ -142,7 +137,7 @@ window.keyPressed = () => {
 
 window.expandBalloon = (m) => {
  // player.diameter = 400;
-  player.scale = 1 + 0.5*(m+1); // scale - https://p5play.org/learn/sprite_animation.html?page=1 
+  player.scale = 1 + 0.3*(m+1); // scale - https://p5play.org/learn/sprite_animation.html?page=1 
   //sprite.width = scaleBalloon + 20*m
   score += 1;
 };
