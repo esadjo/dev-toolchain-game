@@ -43,11 +43,10 @@ window.setup = () => {
       for (let i = 0; i < 5; i++) { // before was 1
           fire = new Sprite(random(windowWidth), random(windowHeight)); // (random(windowWidth), random(windowHeight));
           fire.img = 'images/fire.png';
-          fire.speed = 1;
-          fire.rotationSpeed  = 0.5;
-          //fire.rotation = 0;
-          //fire.rotationSpeed = 1;
-          //fire.setSpeed(random(12), random(360));
+          fire.speed = random(10); // See if can make it more random (so doesn't just go in a straight line) -- kind of did with random speed instead of speed of just 1
+          fire.rotationSpeed  = random(10); //0.5;
+          fire.position.x = random(windowWidth);
+          fire.position.y = random(windowHeight);
           fires.add(fire);
           console.log("Length: " + fires.length);
       }
