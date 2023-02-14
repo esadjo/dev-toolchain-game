@@ -24,6 +24,7 @@ window.setup = () => {
   // Following "Images and animations" from https://creative-coding.decontextualize.com/making-games-with-p5-play/
   player = createSprite(windowWidth/2, windowHeight/2);
   player.addImage(playerImg);
+  player.scale = 0.1;
 
 
   // Reference -- https://editor.p5js.org/mbardin/sketches/OyZLpQW6N 
@@ -46,8 +47,8 @@ window.draw = () => {
     // Using code from "Sprites on the move" of https://creative-coding.decontextualize.com/making-games-with-p5-play/
     //background(1, 36, 68);
     // PULLING FROM INTERACTIVE SKETCH
-    //background(backgroundImg);
-    background(0, 0, 0);
+    background(backgroundImg);
+    //background(0, 0, 0);
     //background(200*20*(score+1), 200*(36+score), 200*68*(score+1));
     for (let i = 0; i < 20; i++) {
       //fill(i*5, i*20, i*40)
@@ -56,7 +57,7 @@ window.draw = () => {
       noStroke();
       //stroke(100 - (mouseX/3), 91 - (8*i), 150 - 2*(mouseY/100));
       strokeWeight(1+ player.position.x/400);
-      fill(80 + (3*score), 1+1.1*score, 1.1*(score+1));
+      fill(80 + (3*score*i), 1+1.1*score, 1.1*(score+1));
       //fill(20*(score+1), 36+score, 68*(score+1));
       //fill(200 - (player.position.x/3), 191 - (8*i), 250 - 2*(player.position.x/100));
       bezier(5*score/2 - i*1000, -2000 - i*10, 100*(1+score)/2 + 2000, 0, 0, 0, -1000, windowHeight*2 + 20000);
@@ -118,6 +119,6 @@ window.keyPressed = () => {
 };
 
 window.expandBalloon = (m) => {
-  player.scale = 1 + 0.3*(m+1); // scale - https://p5play.org/learn/sprite_animation.html?page=1 
+  player.scale = 0.1 + 0.3*(0.1*m+1); // scale - https://p5play.org/learn/sprite_animation.html?page=1 
   score += 1;
 };
