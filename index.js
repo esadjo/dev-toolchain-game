@@ -145,20 +145,27 @@ window.draw = () => {
 };
 
 window.keyPressed = () => {
-    if (keyCode == RIGHT_ARROW) { //QUESTION -- Figure out why right key isn't working
-      player.setSpeed(3.5, 0);
+    //console.log(keyCode);
+    // Note for Error write up -- the direction and speed (using console.log of setspeed to see how the number for keycode wasn't updating for right arrow after the very beginning of the game)
+    if (keyCode == RIGHT_ARROW) {
+      player.direction = 0;
+      player.speed = 3.5;
     }
     else if (keyCode == DOWN_ARROW) {
-      player.setSpeed(3.5, 90);
+      player.direction = 90;
+      player.speed = 3.5;
     }
     else if (keyCode == LEFT_ARROW) {
-      player.setSpeed(3.5, 180);
+      player.direction = 180;
+      player.speed = 3.5;
     }
     else if (keyCode == UP_ARROW) {
-      player.setSpeed(3.5, 270);
+      player.direction = 270;
+      player.speed = 3.5;
     }
     else if (key == ' ') {
-      player.setSpeed(0, 0);
+      player.direction = 0;
+      player.speed = 0;
     }
     return false;  
 };
