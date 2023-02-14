@@ -1,3 +1,8 @@
+// To do: 
+//   - Make fire not just move vertically (make it more random and also SLOWER!!!)
+//   - Add levels of difficulty ?
+//   - Add button to restart game
+
 // Also reference -- https://p5play.org/learn/ 
 
 // https://creative-coding.decontextualize.com/making-games-with-p5-play/
@@ -16,6 +21,7 @@ let playerImg;
 let backgroundImg; 
 window.preload = () => {
   playerImg = loadImage('images/balloon.png');
+  // How to add background image -  https://p5js.org/examples/image-background-image.html
   backgroundImg = loadImage('images/darkBack.png');
 };
 
@@ -24,7 +30,7 @@ window.setup = () => {
   // Following "Images and animations" from https://creative-coding.decontextualize.com/making-games-with-p5-play/
   player = createSprite(windowWidth/2, windowHeight/2);
   player.addImage(playerImg);
-  player.scale = 0.1;
+  player.scale = 0.2;
 
 
   // Reference -- https://editor.p5js.org/mbardin/sketches/OyZLpQW6N 
@@ -63,11 +69,13 @@ window.draw = () => {
       bezier(5*score/2 - i*1000, -2000 - i*10, 100*(1+score)/2 + 2000, 0, 0, 0, -1000, windowHeight*2 + 20000);
       //bezier(player.position.y + i*3000, 0 + i*10, player.position.x - 4000, player.position.y - 1000, 0, 400, 1000, windowHeight + 1000);
     }
-
     textAlign(CENTER, CENTER);
-    textSize(20);
     fill(255);
-    text("use arrow keys, or SPACE to stop", width/2, height*0.67);
+
+    if (score < 2) {
+      textSize(20);
+      text("Use arrow keys, or SPACE to stop", width/2, height*0.8);
+    }
     drawSprites();
 
     if (player.position.x > windowWidth) {
@@ -97,6 +105,22 @@ window.draw = () => {
     if(player.overlap(fires)) {
        expandBalloon(score);
     };
+    
+    textSize(30);
+    text('Number of Hits', width/2, height*0.1);
+    textStyle(BOLD);
+    textSize(50);
+    text(score + "/35", width/2, height*0.17);
+    textStyle(NORMAL);
+    if (score >= 35) {
+      textSize(100);
+      // textStyle - https://p5js.org/reference/#/p5/textStyle 
+      textStyle(BOLD);
+      fill(255);
+      text("Game over!", width/2, height*0.5);
+      text("score");
+      fires.setSpeed(0);
+    }
 };
 
 window.keyPressed = () => {
@@ -119,6 +143,6 @@ window.keyPressed = () => {
 };
 
 window.expandBalloon = (m) => {
-  player.scale = 0.1 + 0.3*(0.1*m+1); // scale - https://p5play.org/learn/sprite_animation.html?page=1 
+  player.scale = 0.2 + 0.06*(m+1); // scale - https://p5play.org/learn/sprite_animation.html?page=1 
   score += 1;
 };
