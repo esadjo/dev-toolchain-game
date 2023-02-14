@@ -40,13 +40,16 @@ window.setup = () => {
     fires = new Group();
   
    // while (fires.length < 2) {
-      for (let i = 0; i < 1; i++) {
+      for (let i = 0; i < 5; i++) { // before was 1
           fire = new Sprite(random(windowWidth), random(windowHeight)); // (random(windowWidth), random(windowHeight));
           fire.img = 'images/fire.png';
+          fire.speed = 1;
+          fire.rotationSpeed  = 0.5;
           //fire.rotation = 0;
           //fire.rotationSpeed = 1;
           //fire.setSpeed(random(12), random(360));
           fires.add(fire);
+          console.log("Length: " + fires.length);
       }
    // }
 };
@@ -95,15 +98,22 @@ window.draw = () => {
     }
     
     for (let i = 0; i < fires.length; i++) {
-      fires[i].setSpeed(0.00000001); // QUESTION - Why does it seem like the speed isn't decreasing even though made it reall small
-      fires[i].position.x += fires[i].width;
+      //fires[i].speed = 0.1;
+      //fires[i].position.x += fires[i].width;
       if (fires[i].position.x > windowWidth) {
-        fires[i].position.x = random(windowWidth);
-        fires[i].position.y = random(windowHeight);
+        fires[i].position.x = 0;
+      } else if (fires[i].position.x < 0) {
+        fires[i].position.x = windowWidth - 10;
       }
-     /* if (score >= 35) {
-        fires[i].setSpeed(0); // QUESTION -- WHY THEY ARE STILL MOVING
-      }*/
+
+      if (fires[i].position.y > windowHeight) {
+        fires[i].position.y = 0;
+      } else if (fires[i].position.y < 0) {
+        fires[i].position.y = windowHeight - 10;
+      }
+      //  fires[i].position.x = random(windowWidth/2);
+      //  fires[i].position.y = random(windowHeight);
+      //}
     }
 
     drawSprites();
