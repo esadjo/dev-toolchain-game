@@ -26,10 +26,11 @@ window.setup = () => {
 	//player = new Sprite();
   // Following "Images and animations" from https://creative-coding.decontextualize.com/making-games-with-p5-play/
   player = createSprite(windowWidth/2, windowHeight/2);
+  player.addImage(playerImg);
 	//Until FIGURE OUT HOW TO SCALE IMAGES
   //player.img = 'images/balloon.png';
   //player.color = 'red'; //(208, 64, 60);
-  player.addImage(playerImg);
+
   //player.diameter = 1000;
   //Testing (eventually use fires)
   test = new Sprite();
@@ -147,6 +148,7 @@ window.keyPressed = () => {
 
 window.expandBalloon = (m) => {
  // player.diameter = 400;
-  sprite.width = scaleBalloon + 20*m
+  player.scale = 1 + 0.5*(m+1); // scale - https://p5play.org/learn/sprite_animation.html?page=1 
+  //sprite.width = scaleBalloon + 20*m
   score += 1;
 };
