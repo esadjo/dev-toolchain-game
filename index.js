@@ -21,6 +21,8 @@ let score = 0;
 let playerImg;
 let backgroundImg; 
 let buttonRestart;
+let song;
+
 window.preload = () => {
   playerImg = loadImage('images/balloon.png');
   // How to add background image -  https://p5js.org/examples/image-background-image.html
@@ -28,11 +30,13 @@ window.preload = () => {
 };
 
 window.setup = () => {
+  song = loadSound('./audio/GameSTekhnev.mp3');
 	new Canvas(windowWidth, windowHeight);
   // Following "Images and animations" from https://creative-coding.decontextualize.com/making-games-with-p5-play/
   player = createSprite(windowWidth/2, windowHeight/2);
   player.addImage(playerImg);
   player.scale = 0.2;
+
 
 
 
@@ -97,8 +101,6 @@ window.draw = () => {
     }
     
     for (let i = 0; i < fires.length; i++) {
-      //fires[i].speed = 0.1;
-      //fires[i].position.x += fires[i].width;
       if (fires[i].position.x > windowWidth) {
         fires[i].position.x = 0;
       } else if (fires[i].position.x < 0) {
@@ -110,16 +112,15 @@ window.draw = () => {
       } else if (fires[i].position.y < 0) {
         fires[i].position.y = windowHeight - 10;
       }
-      //  fires[i].position.x = random(windowWidth/2);
-      //  fires[i].position.y = random(windowHeight);
-      //}
     }
 
     drawSprites();
 
     //REFERENCE -- Collision callbacks -- https://creative-coding.decontextualize.com/making-games-with-p5-play/
-    if(player.overlap(fires)) {
-       expandBalloon(score);
+    for (let i = 0; i < fires.length; i++) {
+      if(player.overlap(fires[i])) {
+        expandBalloon(score);
+      };
     };
     
     textSize(30);
@@ -136,26 +137,12 @@ window.draw = () => {
       text("Game over!", width/2, height*0.5);
       text("score");
       fires.setSpeed(0);
-      // QUESTION !!! -- WHY ISN'T THIS BUTTON APPEARING
-      // https://p5js.org/reference/#/p5/createButton
-     /* buttonRestart = createButton('Restart');
-      buttonRestart.position(windowWidth/2, windowHeight/8*7);
-      buttonRestart.mousePressed(resizeCanvas(windowWidth, windowHeight));*/
-      //buttonRestart = createButton('Restart');
-      /*buttonRestart = createSprite(windowWidth/2, windowHeight/2);
-      buttonRestart.width = 550;
-      buttonRestart.height = 50;
-      buttonRestart.position.x = windowWidth/2;
-      buttonRestart.position.y = windowHeight/8*7;
-      buttonRestart.color = 'white';
-      buttonRestart.textSize = 20; 
-      buttonRestart.text = "Restart";*/
     }
 };
 
 window.keyPressed = () => {
     //console.log(keyCode);
-    // Note for Error write up -- the direction and speed (using console.log of setspeed to see how the number for keycode wasn't updating for right arrow after the very beginning of the game)
+
     if (keyCode == RIGHT_ARROW) {
       player.direction = 0;
       player.speed = 3.5;
@@ -182,4 +169,15 @@ window.keyPressed = () => {
 window.expandBalloon = (m) => {
   player.scale = 0.2 + 0.06*(m+1); // scale - https://p5play.org/learn/sprite_animation.html?page=1 
   score += 1;
+};
+
+
+window.mousePressed = () => {
+  if (song.isPlaying()) {
+    // .isPlaying() returns a boolean
+    song.stop();
+  // background(255, 0, 200);
+  } else {
+    song.play();
+  }
 };
