@@ -43,6 +43,13 @@ window.setup = () => {
   player.addImage(playerImg);
   player.scale = 0.2;
 
+  musiccontrol = createSprite(windowWidth/8*7, windowHeight/8*1);
+  musiccontrol.addImage(musicImgPlay);
+  musiccontrol.scale = 0.15;
+  musiccontrol.collider = 'none';
+
+  
+
 
 
 
@@ -145,29 +152,6 @@ window.draw = () => {
       text("score");
       fires.setSpeed(0);
     }
-
-
-    musiccontrol = createSprite(windowWidth/8*7, windowHeight/8*7);
-    musiccontrol.addImage(musicImgPlay);
-    musiccontrol.scale = 0.2;
-    musiccontrol.collider = 'static';
-
-    if (musiccontrol.mouseIsOver /*&& mouseIsPressed*/) {
-      countMusicControl += 1;
-      if (countMusicControl % 2 == 0) {
-        musiccontrol.scale = 1.2;
-        //musiccontrol.addImage(musicImgPause);
-        console.log("In here");
-
-      } else {
-       // musiccontrol.addImage(musicImgPlay);
-       musiccontrol.scale = 0.2;
-      }
-
-     // musiccontrol.scale = 0.2;
-
-      //musiccontrol.rotation += 4;
-    }
 };
 
 window.keyPressed = () => {
@@ -206,9 +190,27 @@ window.mousePressed = () => {
   if (song.isPlaying()) {
     // .isPlaying() returns a boolean
     song.stop();
+    musiccontrol.remove();
   // background(255, 0, 200);
+        musiccontrol = createSprite(windowWidth/8*7, windowHeight/8*1);
+        musiccontrol.addImage(musicImgPlay);
+        musiccontrol.scale = 0.15;
+        musiccontrol.collider = 'none';
   } else {
     //song.play();
     song.loop();
+    musiccontrol.remove();
+    musiccontrol = createSprite(windowWidth/8*7, windowHeight/8*1);
+    //if (musiccontrol.mouseIsOver) {
+      musiccontrol.addImage(musicImgPause);
+      musiccontrol.scale = 0.15;
+      musiccontrol.collider = 'none';
+    //}
+    
   }
 };
+
+
+window.windowResized = () => {
+  resizeCanvas(windowWidth, windowHeight);
+}
