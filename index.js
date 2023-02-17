@@ -22,20 +22,27 @@ let playerImg;
 let backgroundImg; 
 let buttonRestart;
 let song;
+let musiccontrol;
+let musicImgPause;
+let musicImgPlay;
+let countMusicControl = 0;
 
 window.preload = () => {
   playerImg = loadImage('images/balloon.png');
   // How to add background image -  https://p5js.org/examples/image-background-image.html
+  musicImgPause = loadImage('images/pauseim.png');
+  musicImgPlay = loadImage('images/playim.png');
   backgroundImg = loadImage('images/darkBack.png');
 };
 
 window.setup = () => {
-  song = loadSound('./audio/GameSTekhnev.mp3');
+  song = loadSound('./audio/gameaudio.mp3');
 	new Canvas(windowWidth, windowHeight);
   // Following "Images and animations" from https://creative-coding.decontextualize.com/making-games-with-p5-play/
   player = createSprite(windowWidth/2, windowHeight/2);
   player.addImage(playerImg);
   player.scale = 0.2;
+
 
 
 
@@ -138,6 +145,29 @@ window.draw = () => {
       text("score");
       fires.setSpeed(0);
     }
+
+
+    musiccontrol = createSprite(windowWidth/8*7, windowHeight/8*7);
+    musiccontrol.addImage(musicImgPlay);
+    musiccontrol.scale = 0.2;
+    musiccontrol.collider = 'static';
+
+    if (musiccontrol.mouseIsOver /*&& mouseIsPressed*/) {
+      countMusicControl += 1;
+      if (countMusicControl % 2 == 0) {
+        musiccontrol.scale = 1.2;
+        //musiccontrol.addImage(musicImgPause);
+        console.log("In here");
+
+      } else {
+       // musiccontrol.addImage(musicImgPlay);
+       musiccontrol.scale = 0.2;
+      }
+
+     // musiccontrol.scale = 0.2;
+
+      //musiccontrol.rotation += 4;
+    }
 };
 
 window.keyPressed = () => {
@@ -178,6 +208,7 @@ window.mousePressed = () => {
     song.stop();
   // background(255, 0, 200);
   } else {
-    song.play();
+    //song.play();
+    song.loop();
   }
 };
