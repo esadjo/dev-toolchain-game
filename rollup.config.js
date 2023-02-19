@@ -9,7 +9,7 @@ module.exports = {
   treeshake: false,
   plugins: [
     copy({
-      targets: [{ src: "index.html", dest: "dist" }, { src: "audio", dest: "dist" }, { src: "images", dest: "dist" }]
+      targets: [{ src: ["index.html", "audio", "images"], dest: "dist" }]
     }),
     nodeResolve(),
   ],
