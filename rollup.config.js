@@ -10,6 +10,8 @@ module.exports = {
   plugins: [
     copy({
       targets: [{ src: "index.html", dest: "dist" }],
+      targets: [{ src: "audio", dest: "dist" }],
+      targets: [{ src: "images", dest: "dist" }],
     }),
     nodeResolve(),
   ],
