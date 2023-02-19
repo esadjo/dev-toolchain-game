@@ -10,10 +10,12 @@ let fires;
 let score = 0;
 let playerImg;
 let backgroundImg; 
+let buttonRestart;
 let song;
 let musiccontrol;
 let musicImgPause;
 let musicImgPlay;
+let countMusicControl = 0;
 
 window.preload = () => {
   playerImg = loadImage('images/balloon.png');
@@ -111,7 +113,9 @@ window.draw = () => {
     for (let i = 0; i < fires.length; i++) {
       if(player.overlap(fires[i])) {
         expandBalloon(score);
-      }    }    
+      };
+    };
+    
     textSize(30);
     text('Number of Hits', width/2, height*0.1);
     textStyle(BOLD);
